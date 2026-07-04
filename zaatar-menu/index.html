@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" id="htmlRoot">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>مطعم الزعتر — القائمة الرقمية</title>
 <meta name="theme-color" content="#0d0d0d">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Amiri:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Amiri:wght@700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#0b0b0c;
@@ -253,18 +253,39 @@
   }
   .footer strong{ color:var(--gold-bright); font-size:15px; display:block; margin-bottom:6px; font-family:'Amiri',serif; }
   .footer .qr-note{ margin-top:10px; opacity:0.7; font-size:11px; }
+
+  html[dir="ltr"] body{ font-family:'Inter','Cairo',sans-serif; }
+  html[dir="ltr"] .brand-name{ font-family:'Georgia','Amiri',serif; }
+  .lang-toggle{
+    position:absolute;
+    top:18px;
+    inset-inline-end:18px;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(205,163,74,0.45);
+    color:var(--gold-bright);
+    border-radius:999px;
+    padding:7px 15px;
+    font-size:12.5px;
+    font-weight:700;
+    cursor:pointer;
+    backdrop-filter:blur(3px);
+    white-space:nowrap;
+    font-family:inherit;
+  }
+  .lang-toggle:active{ transform:scale(0.95); }
 </style>
 </head>
 <body>
 
 <div class="hero">
+  <button class="lang-toggle" id="langToggle" onclick="toggleLang()">English</button>
   <div class="hero-brand">
     <div class="hero-mark">🌿</div>
-    <p class="brand-name">مطعم الزعتر</p>
-    <p class="brand-tagline">نكهات أصيلة من قلب الشرق</p>
+    <p class="brand-name" id="brandName">مطعم الزعتر</p>
+    <p class="brand-tagline" id="brandTagline">نكهات أصيلة من قلب الشرق</p>
   </div>
   <div class="meta-row">
-    <span class="meta-pill">🕒 يومياً من ١١ ص حتى منتصف الليل</span>
+    <span class="meta-pill" id="hoursText">🕒 يومياً من ١١ ص حتى منتصف الليل</span>
     <span class="meta-pill">📞 <a href="tel:+9611234567">+961 1 234 567</a></span>
   </div>
 </div>
@@ -282,24 +303,76 @@
 <div id="menuContent"></div>
 
 <div class="footer">
-  <strong>مطعم الزعتر</strong>
-  شارع الاستقلال، بيروت، لبنان<br>
+  <strong id="footerName">مطعم الزعتر</strong>
+  <span id="footerAddress">شارع الاستقلال، بيروت، لبنان</span><br>
   @zaatar.restaurant
-  <div class="qr-note">قائمة رقمية · امسح · تصفح · استمتع</div>
+  <div class="qr-note" id="qrNote">قائمة رقمية · امسح · تصفح · استمتع</div>
 </div>
 
 <script>
-const MENU = {"appetizers": {"label": "مقبلات", "icon": "🥗", "items": [{"key": "hummus", "name": "حمص بالطحينة", "desc": "حمص كريمي مع طحينة وزيت زيتون وحبة صنوبر", "price": 6}, {"key": "moutabal", "name": "متبل باذنجان", "desc": "باذنجان مشوي مهروس مع طحينة ورمان", "price": 6.5}, {"key": "tabbouleh", "name": "تبولة", "desc": "بقدونس مفروم ناعم مع برغل وطماطم وليمون", "price": 7}, {"key": "fattoush", "name": "فتوش", "desc": "خضار طازجة مع خبز محمص مقرمش ودبس رمان", "price": 7}]}, "grills": {"label": "مشاوي", "icon": "🍢", "items": [{"key": "shish-tawook", "name": "شيش طاووق", "desc": "قطع دجاج متبلة ومشوية على الفحم مع ثوم", "price": 14}, {"key": "beef-skewers", "name": "كباب لحم", "desc": "أسياخ لحم بقري مشوية بنكهة مدخنة", "price": 16}, {"key": "kafta", "name": "كفتة مشوية", "desc": "لحم مفروم متبل بالبهارات ومشوي على الفحم", "price": 14}, {"key": "mixed-grill", "name": "مشاوي مشكلة", "desc": "تشكيلة من الشيش طاووق والكباب والكفتة", "price": 22, "popular": true}]}, "juices": {"label": "عصائر طبيعية", "icon": "🥤", "items": [{"key": "orange-juice", "name": "عصير برتقال", "desc": "عصير برتقال طازج معصور فوراً", "price": 5}, {"key": "mango-juice", "name": "عصير مانجا", "desc": "عصير مانجا طبيعي منعش وكثيف القوام", "price": 5.5}, {"key": "strawberry-juice", "name": "عصير فراولة", "desc": "عصير فراولة طازج بدون إضافات", "price": 5.5}, {"key": "mint-lemonade", "name": "ليموناضة بالنعناع", "desc": "ليمون طازج مع أوراق نعناع وثلج مجروش", "price": 5}]}, "hot_drinks": {"label": "مشروبات ساخنة", "icon": "☕", "items": [{"key": "arabic-coffee", "name": "قهوة عربية", "desc": "قهوة عربية أصيلة تقدم مع التمر", "price": 4}, {"key": "mint-tea", "name": "شاي بالنعناع", "desc": "شاي أسود مع أوراق نعناع طازجة", "price": 3.5}, {"key": "turkish-coffee", "name": "قهوة تركية", "desc": "قهوة تركية تقليدية مع قطعة راحة الحلقوم", "price": 4}, {"key": "sahlab", "name": "سحلب", "desc": "مشروب ساخن كريمي مع قرفة وفستق وجوز هند", "price": 5}]}};
+const MENU = {"appetizers": {"label": "مقبلات", "icon": "🥗", "items": [{"key": "hummus", "name": "حمص بالطحينة", "desc": "حمص كريمي مع طحينة وزيت زيتون وحبة صنوبر", "price": 6, "name_en": "Hummus with Tahini", "desc_en": "Creamy hummus with tahini, olive oil and pine nuts"}, {"key": "moutabal", "name": "متبل باذنجان", "desc": "باذنجان مشوي مهروس مع طحينة ورمان", "price": 6.5, "name_en": "Eggplant Moutabal", "desc_en": "Grilled eggplant mash with tahini and pomegranate"}, {"key": "tabbouleh", "name": "تبولة", "desc": "بقدونس مفروم ناعم مع برغل وطماطم وليمون", "price": 7, "name_en": "Tabbouleh", "desc_en": "Finely chopped parsley with bulgur, tomato and lemon"}, {"key": "fattoush", "name": "فتوش", "desc": "خضار طازجة مع خبز محمص مقرمش ودبس رمان", "price": 7, "name_en": "Fattoush", "desc_en": "Fresh vegetables with crispy toasted bread and pomegranate molasses"}], "label_en": "Appetizers"}, "grills": {"label": "مشاوي", "icon": "🍢", "items": [{"key": "shish-tawook", "name": "شيش طاووق", "desc": "قطع دجاج متبلة ومشوية على الفحم مع ثوم", "price": 14, "name_en": "Shish Tawook", "desc_en": "Marinated chicken skewers grilled over charcoal with garlic"}, {"key": "beef-skewers", "name": "كباب لحم", "desc": "أسياخ لحم بقري مشوية بنكهة مدخنة", "price": 16, "name_en": "Beef Skewers", "desc_en": "Grilled beef skewers with a smoky flavor"}, {"key": "kafta", "name": "كفتة مشوية", "desc": "لحم مفروم متبل بالبهارات ومشوي على الفحم", "price": 14, "name_en": "Grilled Kafta", "desc_en": "Spiced ground meat grilled over charcoal"}, {"key": "mixed-grill", "name": "مشاوي مشكلة", "desc": "تشكيلة من الشيش طاووق والكباب والكفتة", "price": 22, "popular": true, "name_en": "Mixed Grill", "desc_en": "A selection of shish tawook, beef skewers and kafta"}], "label_en": "Grills"}, "juices": {"label": "عصائر طبيعية", "icon": "🥤", "items": [{"key": "orange-juice", "name": "عصير برتقال", "desc": "عصير برتقال طازج معصور فوراً", "price": 5, "name_en": "Orange Juice", "desc_en": "Freshly squeezed orange juice"}, {"key": "mango-juice", "name": "عصير مانجا", "desc": "عصير مانجا طبيعي منعش وكثيف القوام", "price": 5.5, "name_en": "Mango Juice", "desc_en": "Natural mango juice, refreshing and thick"}, {"key": "strawberry-juice", "name": "عصير فراولة", "desc": "عصير فراولة طازج بدون إضافات", "price": 5.5, "name_en": "Strawberry Juice", "desc_en": "Fresh strawberry juice, no additives"}, {"key": "mint-lemonade", "name": "ليموناضة بالنعناع", "desc": "ليمون طازج مع أوراق نعناع وثلج مجروش", "price": 5, "name_en": "Mint Lemonade", "desc_en": "Fresh lemon with mint leaves and crushed ice"}], "label_en": "Fresh Juices"}, "hot_drinks": {"label": "مشروبات ساخنة", "icon": "☕", "items": [{"key": "arabic-coffee", "name": "قهوة عربية", "desc": "قهوة عربية أصيلة تقدم مع التمر", "price": 4, "name_en": "Arabic Coffee", "desc_en": "Authentic Arabic coffee served with dates"}, {"key": "mint-tea", "name": "شاي بالنعناع", "desc": "شاي أسود مع أوراق نعناع طازجة", "price": 3.5, "name_en": "Mint Tea", "desc_en": "Black tea with fresh mint leaves"}, {"key": "turkish-coffee", "name": "قهوة تركية", "desc": "قهوة تركية تقليدية مع قطعة راحة الحلقوم", "price": 4, "name_en": "Turkish Coffee", "desc_en": "Traditional Turkish coffee with a piece of Turkish delight"}, {"key": "sahlab", "name": "سحلب", "desc": "مشروب ساخن كريمي مع قرفة وفستق وجوز هند", "price": 5, "name_en": "Sahlab", "desc_en": "Creamy hot drink with cinnamon, pistachio and coconut"}], "label_en": "Hot Drinks"}};
 const IMAGES = {"hummus": "img/hummus.jpg", "moutabal": "img/moutabal.jpg", "tabbouleh": "img/tabbouleh.jpg", "fattoush": "img/fattoush.jpg", "shish-tawook": "img/shish-tawook.jpg", "beef-skewers": "img/beef-skewers.jpg", "kafta": "img/kafta.jpg", "mixed-grill": "img/mixed-grill.jpg", "orange-juice": "img/orange-juice.jpg", "mango-juice": "img/mango-juice.jpg", "strawberry-juice": "img/strawberry-juice.jpg", "mint-lemonade": "img/mint-lemonade.jpg", "arabic-coffee": "img/arabic-coffee.jpg", "mint-tea": "img/mint-tea.jpg", "turkish-coffee": "img/turkish-coffee.jpg", "sahlab": "img/sahlab.jpg", "hero-bg": "img/hero-bg.jpg"};
 const FOOD_EMOJI = {appetizers:'🥗', grills:'🍢', juices:'🥤', hot_drinks:'☕'};
 let activeCategory = 'all';
+let lang = 'ar';
+
+const STRINGS = {
+  ar: {
+    brandName: 'مطعم الزعتر',
+    brandTagline: 'نكهات أصيلة من قلب الشرق',
+    hours: '🕒 يومياً من ١١ ص حتى منتصف الليل',
+    searchPlaceholder: 'ابحث في القائمة...',
+    all: 'الكل',
+    popular: '⭐ الأكثر طلبًا',
+    noResults: '🔍<br>لا توجد نتائج',
+    footerName: 'مطعم الزعتر',
+    footerAddress: 'شارع الاستقلال، بيروت، لبنان',
+    qrNote: 'قائمة رقمية · امسح · تصفح · استمتع',
+    toggleLabel: 'English'
+  },
+  en: {
+    brandName: 'Zaatar Restaurant',
+    brandTagline: 'Authentic Flavors from the Heart of the East',
+    hours: '🕒 Daily 11am – Midnight',
+    searchPlaceholder: 'Search menu...',
+    all: 'All',
+    popular: '⭐ Popular',
+    noResults: '🔍<br>No items found',
+    footerName: 'Zaatar Restaurant',
+    footerAddress: 'Independence Street, Beirut, Lebanon',
+    qrNote: 'Digital Menu · Scan · Browse · Enjoy',
+    toggleLabel: 'العربية'
+  }
+};
+
+function toggleLang(){
+  lang = lang === 'ar' ? 'en' : 'ar';
+  const html = document.getElementById('htmlRoot');
+  html.setAttribute('lang', lang);
+  html.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+  renderStaticText();
+  renderTabs();
+  renderMenu();
+}
+
+function renderStaticText(){
+  const s = STRINGS[lang];
+  document.getElementById('brandName').innerText = s.brandName;
+  document.getElementById('brandTagline').innerText = s.brandTagline;
+  document.getElementById('hoursText').innerText = s.hours;
+  document.getElementById('searchInput').placeholder = s.searchPlaceholder;
+  document.getElementById('langToggle').innerText = s.toggleLabel;
+  document.getElementById('footerName').innerText = s.footerName;
+  document.getElementById('footerAddress').innerText = s.footerAddress;
+  document.getElementById('qrNote').innerText = s.qrNote;
+}
 
 function renderTabs(){
   const tabsEl = document.getElementById('tabs');
   tabsEl.innerHTML = '';
   const allTab = document.createElement('div');
   allTab.className = 'tab' + (activeCategory === 'all' ? ' active' : '');
-  allTab.innerText = 'الكل';
+  allTab.innerText = STRINGS[lang].all;
   allTab.onclick = () => { activeCategory = 'all'; renderTabs(); renderMenu(); };
   tabsEl.appendChild(allTab);
 
@@ -307,7 +380,7 @@ function renderTabs(){
     const cat = MENU[catKey];
     const tab = document.createElement('div');
     tab.className = 'tab' + (activeCategory === catKey ? ' active' : '');
-    tab.innerText = cat.label;
+    tab.innerText = lang === 'ar' ? cat.label : cat.label_en;
     tab.onclick = () => {
       activeCategory = catKey;
       renderTabs();
@@ -328,11 +401,14 @@ function renderMenu(){
 
   catKeys.forEach(catKey => {
     const cat = MENU[catKey];
+    const catLabel = lang === 'ar' ? cat.label : cat.label_en;
     let items = cat.items;
     if(query){
       items = items.filter(i =>
         i.name.toLowerCase().includes(query) ||
-        i.desc.toLowerCase().includes(query)
+        i.desc.toLowerCase().includes(query) ||
+        i.name_en.toLowerCase().includes(query) ||
+        i.desc_en.toLowerCase().includes(query)
       );
     }
     if(items.length === 0) return;
@@ -344,24 +420,26 @@ function renderMenu(){
 
     const title = document.createElement('div');
     title.className = 'category-title';
-    title.innerHTML = `${FOOD_EMOJI[catKey]||'🍽️'} ${cat.label} <span class="category-count">${items.length}</span>`;
+    title.innerHTML = `${FOOD_EMOJI[catKey]||'🍽️'} ${catLabel} <span class="category-count">${items.length}</span>`;
     section.appendChild(title);
 
     items.forEach(item => {
       const card = document.createElement('div');
       card.className = 'item-card';
       const imgSrc = IMAGES[item.key] || '';
+      const itemName = lang === 'ar' ? item.name : item.name_en;
+      const itemDesc = lang === 'ar' ? item.desc : item.desc_en;
       card.innerHTML = `
-        <img class="item-img" src="${imgSrc}" alt="${item.name}" loading="lazy">
+        <img class="item-img" src="${imgSrc}" alt="${itemName}" loading="lazy">
         <div class="item-body">
           <div class="item-top">
             <div>
-              <p class="item-name">${item.name}</p>
-              ${item.popular ? '<span class="popular-badge">⭐ الأكثر طلبًا</span>' : ''}
+              <p class="item-name">${itemName}</p>
+              ${item.popular ? `<span class="popular-badge">${STRINGS[lang].popular}</span>` : ''}
             </div>
             <div class="item-price">$${item.price.toFixed(2)}</div>
           </div>
-          <p class="item-desc">${item.desc}</p>
+          <p class="item-desc">${itemDesc}</p>
         </div>
       `;
       section.appendChild(card);
@@ -370,10 +448,11 @@ function renderMenu(){
   });
 
   if(!anyResults){
-    container.innerHTML = '<div class="empty-state">🔍<br>لا توجد نتائج</div>';
+    container.innerHTML = `<div class="empty-state">${STRINGS[lang].noResults}</div>`;
   }
 }
 
+renderStaticText();
 renderTabs();
 renderMenu();
 </script>

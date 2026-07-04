@@ -223,6 +223,10 @@
     border-radius:999px;
     margin-top:5px;
   }
+  .offer-badge{
+    background:linear-gradient(135deg, #ff8a3d, #e8543a);
+    color:#fff;
+  }
   .item-desc{
     font-size:12.5px;
     color:var(--ink-soft);
@@ -310,11 +314,13 @@
 </div>
 
 <script>
-const MENU = {"appetizers": {"label": "مقبلات", "icon": "🥗", "items": [{"key": "hummus", "name": "حمص بالطحينة", "desc": "حمص كريمي مع طحينة وزيت زيتون وحبة صنوبر", "price": 6, "name_en": "Hummus with Tahini", "desc_en": "Creamy hummus with tahini, olive oil and pine nuts"}, {"key": "moutabal", "name": "متبل باذنجان", "desc": "باذنجان مشوي مهروس مع طحينة ورمان", "price": 6.5, "name_en": "Eggplant Moutabal", "desc_en": "Grilled eggplant mash with tahini and pomegranate"}, {"key": "tabbouleh", "name": "تبولة", "desc": "بقدونس مفروم ناعم مع برغل وطماطم وليمون", "price": 7, "name_en": "Tabbouleh", "desc_en": "Finely chopped parsley with bulgur, tomato and lemon"}, {"key": "fattoush", "name": "فتوش", "desc": "خضار طازجة مع خبز محمص مقرمش ودبس رمان", "price": 7, "name_en": "Fattoush", "desc_en": "Fresh vegetables with crispy toasted bread and pomegranate molasses"}], "label_en": "Appetizers"}, "grills": {"label": "مشاوي", "icon": "🍢", "items": [{"key": "shish-tawook", "name": "شيش طاووق", "desc": "قطع دجاج متبلة ومشوية على الفحم مع ثوم", "price": 14, "name_en": "Shish Tawook", "desc_en": "Marinated chicken skewers grilled over charcoal with garlic"}, {"key": "beef-skewers", "name": "كباب لحم", "desc": "أسياخ لحم بقري مشوية بنكهة مدخنة", "price": 16, "name_en": "Beef Skewers", "desc_en": "Grilled beef skewers with a smoky flavor"}, {"key": "kafta", "name": "كفتة مشوية", "desc": "لحم مفروم متبل بالبهارات ومشوي على الفحم", "price": 14, "name_en": "Grilled Kafta", "desc_en": "Spiced ground meat grilled over charcoal"}, {"key": "mixed-grill", "name": "مشاوي مشكلة", "desc": "تشكيلة من الشيش طاووق والكباب والكفتة", "price": 22, "popular": true, "name_en": "Mixed Grill", "desc_en": "A selection of shish tawook, beef skewers and kafta"}], "label_en": "Grills"}, "juices": {"label": "عصائر طبيعية", "icon": "🥤", "items": [{"key": "orange-juice", "name": "عصير برتقال", "desc": "عصير برتقال طازج معصور فوراً", "price": 5, "name_en": "Orange Juice", "desc_en": "Freshly squeezed orange juice"}, {"key": "mango-juice", "name": "عصير مانجا", "desc": "عصير مانجا طبيعي منعش وكثيف القوام", "price": 5.5, "name_en": "Mango Juice", "desc_en": "Natural mango juice, refreshing and thick"}, {"key": "strawberry-juice", "name": "عصير فراولة", "desc": "عصير فراولة طازج بدون إضافات", "price": 5.5, "name_en": "Strawberry Juice", "desc_en": "Fresh strawberry juice, no additives"}, {"key": "mint-lemonade", "name": "ليموناضة بالنعناع", "desc": "ليمون طازج مع أوراق نعناع وثلج مجروش", "price": 5, "name_en": "Mint Lemonade", "desc_en": "Fresh lemon with mint leaves and crushed ice"}], "label_en": "Fresh Juices"}, "hot_drinks": {"label": "مشروبات ساخنة", "icon": "☕", "items": [{"key": "arabic-coffee", "name": "قهوة عربية", "desc": "قهوة عربية أصيلة تقدم مع التمر", "price": 4, "name_en": "Arabic Coffee", "desc_en": "Authentic Arabic coffee served with dates"}, {"key": "mint-tea", "name": "شاي بالنعناع", "desc": "شاي أسود مع أوراق نعناع طازجة", "price": 3.5, "name_en": "Mint Tea", "desc_en": "Black tea with fresh mint leaves"}, {"key": "turkish-coffee", "name": "قهوة تركية", "desc": "قهوة تركية تقليدية مع قطعة راحة الحلقوم", "price": 4, "name_en": "Turkish Coffee", "desc_en": "Traditional Turkish coffee with a piece of Turkish delight"}, {"key": "sahlab", "name": "سحلب", "desc": "مشروب ساخن كريمي مع قرفة وفستق وجوز هند", "price": 5, "name_en": "Sahlab", "desc_en": "Creamy hot drink with cinnamon, pistachio and coconut"}], "label_en": "Hot Drinks"}};
-const IMAGES = {"hummus": "img/hummus.jpg", "moutabal": "img/moutabal.jpg", "tabbouleh": "img/tabbouleh.jpg", "fattoush": "img/fattoush.jpg", "shish-tawook": "img/shish-tawook.jpg", "beef-skewers": "img/beef-skewers.jpg", "kafta": "img/kafta.jpg", "mixed-grill": "img/mixed-grill.jpg", "orange-juice": "img/orange-juice.jpg", "mango-juice": "img/mango-juice.jpg", "strawberry-juice": "img/strawberry-juice.jpg", "mint-lemonade": "img/mint-lemonade.jpg", "arabic-coffee": "img/arabic-coffee.jpg", "mint-tea": "img/mint-tea.jpg", "turkish-coffee": "img/turkish-coffee.jpg", "sahlab": "img/sahlab.jpg", "hero-bg": "img/hero-bg.jpg"};
+let MENU = {};
+let IMAGES = {};
 const FOOD_EMOJI = {appetizers:'🥗', grills:'🍢', juices:'🥤', hot_drinks:'☕'};
 let activeCategory = 'all';
 let lang = 'ar';
+let searchDebounceTimer = null;
+const ANALYTICS_ENDPOINT = 'https://03l2yp511l-5055.hosted.obvious.ai/api/track';
 
 const STRINGS = {
   ar: {
@@ -324,6 +330,7 @@ const STRINGS = {
     searchPlaceholder: 'ابحث في القائمة...',
     all: 'الكل',
     popular: '⭐ الأكثر طلبًا',
+    offer: '🔥 عرض اليوم',
     noResults: '🔍<br>لا توجد نتائج',
     footerName: 'مطعم وكافيه الخواجة',
     footerAddress: 'حمص، سوريا',
@@ -337,6 +344,7 @@ const STRINGS = {
     searchPlaceholder: 'Search menu...',
     all: 'All',
     popular: '⭐ Popular',
+    offer: '🔥 Today\'s Special',
     noResults: '🔍<br>No items found',
     footerName: 'Al Khawaja Restaurant & Cafe',
     footerAddress: 'Homs, Syria',
@@ -344,6 +352,17 @@ const STRINGS = {
     toggleLabel: 'العربية'
   }
 };
+
+function trackEvent(type, payload){
+  try{
+    fetch(ANALYTICS_ENDPOINT, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({type, ...payload, ts: Date.now()})
+    }).catch(()=>{});
+  }catch(e){}
+}
+trackEvent('view', {});
 
 function toggleLang(){
   lang = lang === 'ar' ? 'en' : 'ar';
@@ -396,13 +415,18 @@ function renderMenu(){
   container.innerHTML = '';
   const query = document.getElementById('searchInput').value.trim().toLowerCase();
 
+  if(query){
+    clearTimeout(searchDebounceTimer);
+    searchDebounceTimer = setTimeout(() => trackEvent('search', {query}), 700);
+  }
+
   const catKeys = activeCategory === 'all' ? Object.keys(MENU) : [activeCategory];
   let anyResults = false;
 
   catKeys.forEach(catKey => {
     const cat = MENU[catKey];
     const catLabel = lang === 'ar' ? cat.label : cat.label_en;
-    let items = cat.items;
+    let items = cat.items.filter(i => !i.hidden);
     if(query){
       items = items.filter(i =>
         i.name.toLowerCase().includes(query) ||
@@ -426,6 +450,7 @@ function renderMenu(){
     items.forEach(item => {
       const card = document.createElement('div');
       card.className = 'item-card';
+      card.onclick = () => trackEvent('item_view', {key: item.key, name: item.name});
       const imgSrc = IMAGES[item.key] || '';
       const itemName = lang === 'ar' ? item.name : item.name_en;
       const itemDesc = lang === 'ar' ? item.desc : item.desc_en;
@@ -435,9 +460,9 @@ function renderMenu(){
           <div class="item-top">
             <div>
               <p class="item-name">${itemName}</p>
-              ${item.popular ? `<span class="popular-badge">${STRINGS[lang].popular}</span>` : ''}
+              ${item.offer ? `<span class="popular-badge offer-badge">${STRINGS[lang].offer}</span>` : (item.popular ? `<span class="popular-badge">${STRINGS[lang].popular}</span>` : '')}
             </div>
-            <div class="item-price">$${item.price.toFixed(2)}</div>
+            <div class="item-price">$${Number(item.price).toFixed(2)}</div>
           </div>
           <p class="item-desc">${itemDesc}</p>
         </div>
@@ -452,9 +477,21 @@ function renderMenu(){
   }
 }
 
-renderStaticText();
-renderTabs();
-renderMenu();
+async function loadMenu(){
+  try{
+    const res = await fetch('menu-data.json?t=' + Date.now());
+    const data = await res.json();
+    MENU = data.menu;
+    IMAGES = data.images;
+  }catch(e){
+    console.error('Failed to load menu data', e);
+  }
+  renderStaticText();
+  renderTabs();
+  renderMenu();
+}
+
+loadMenu();
 </script>
 
 </body>

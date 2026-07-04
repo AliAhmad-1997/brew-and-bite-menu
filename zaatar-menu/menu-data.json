@@ -10,8 +10,8 @@
           "key": "hummus",
           "name": "حمص بالطحينة",
           "name_en": "Hummus with Tahini",
-          "offer": true,
-          "price": 6.5
+          "offer": false,
+          "price": 6
         },
         {
           "desc": "باذنجان مشوي مهروس مع طحينة ورمان",
@@ -53,7 +53,7 @@
         {
           "desc": "قطع دجاج متبلة ومشوية على الفحم مع ثوم",
           "desc_en": "Marinated chicken skewers grilled over charcoal with garlic",
-          "hidden": true,
+          "hidden": false,
           "key": "shish-tawook",
           "name": "شيش طاووق",
           "name_en": "Shish Tawook",

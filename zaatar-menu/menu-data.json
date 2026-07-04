@@ -11,7 +11,7 @@
           "name": "حمص بالطحينة",
           "name_en": "Hummus with Tahini",
           "offer": false,
-          "price": 6
+          "price": 1
         },
         {
           "desc": "باذنجان مشوي مهروس مع طحينة ورمان",
@@ -21,7 +21,7 @@
           "name": "متبل باذنجان",
           "name_en": "Eggplant Moutabal",
           "offer": false,
-          "price": 6.5
+          "price": 1
         },
         {
           "desc": "بقدونس مفروم ناعم مع برغل وطماطم وليمون",
@@ -31,7 +31,7 @@
           "name": "تبولة",
           "name_en": "Tabbouleh",
           "offer": false,
-          "price": 7
+          "price": 1
         },
         {
           "desc": "خضار طازجة مع خبز محمص مقرمش ودبس رمان",
@@ -41,7 +41,7 @@
           "name": "فتوش",
           "name_en": "Fattoush",
           "offer": false,
-          "price": 7
+          "price": 1
         }
       ],
       "label": "مقبلات",
@@ -58,7 +58,7 @@
           "name": "شيش طاووق",
           "name_en": "Shish Tawook",
           "offer": false,
-          "price": 14
+          "price": 1
         },
         {
           "desc": "أسياخ لحم بقري مشوية بنكهة مدخنة",

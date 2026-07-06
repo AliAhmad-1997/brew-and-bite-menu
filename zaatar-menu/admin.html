@@ -407,11 +407,11 @@
     </div>
 
     <div class="form-field">
-      <label>السعر (بالدولار $)</label>
-      <input type="number" id="formPrice" step="0.5" min="0" placeholder="0.00">
+      <label>السعر (ل.س)</label>
+      <input type="number" id="formPrice" step="500" min="0" placeholder="مثال: 78000">
     </div>
 
-    <p class="toast-note">💡 الصنف الجديد يستخدم صورة افتراضية لحين إضافة صورة خاصة له لاحقاً.</p>
+    <p class="toast-note">💡 الصنف الجديد يستخدم صورة افتراضية لحين إضافة صورة خاصة له لاحقاً.<br>💱 الأسعار تُدخل بالليرة السورية دائماً، والدولار يُحسب تلقائياً للعرض على الزبون.</p>
 
     <div class="modal-actions">
       <button class="btn-secondary" onclick="closeModal()">إلغاء</button>
@@ -432,6 +432,15 @@ const CATEGORY_LABELS = {
 let MENU_DATA = null;
 let CURRENT_SHA = null;
 let AUTH_PASSWORD = null; // نحتفظ فيها بالذاكرة فقط بعد نجاح الدخول (مش تُخزّن)
+let EXCHANGE_RATE = 13000; // سعر الصرف ل.س مقابل 1 دولار (يُحدَّث من menu-data.json عند التحميل)
+
+// الأسعار مخزّنة بالدولار داخلياً (لتوافق باقي النظام)، لكن صاحب المطعم يدخلها بالليرة السورية مباشرة
+function usdToSyp(usd){
+  return Math.round((usd * EXCHANGE_RATE) / 100) * 100; // تقريب لأقرب 100 ل.س
+}
+function sypToUsd(syp){
+  return Math.round((syp / EXCHANGE_RATE) * 100) / 100; // تقريب لأقرب سنت دولار (للتخزين الداخلي فقط)
+}
 
 // ---------- تسجيل الدخول ----------
 async function attemptLogin(){
@@ -482,6 +491,9 @@ async function loadMenu(){
     if(!json.ok) throw new Error(json.error);
     MENU_DATA = json.data;
     CURRENT_SHA = json.sha;
+    if(MENU_DATA.settings && MENU_DATA.settings.exchange_rate_syp_per_usd){
+      EXCHANGE_RATE = MENU_DATA.settings.exchange_rate_syp_per_usd;
+    }
     renderCategories();
     hideStatus();
   }catch(e){
@@ -566,8 +578,8 @@ function renderItemCard(catKey, item){
     </div>
 
     <div class="price-row">
-      <label>السعر ($)</label>
-      <input type="number" class="price-input" step="0.5" min="0" value="${item.price}">
+      <label>السعر (ل.س)</label>
+      <input type="number" class="price-input" step="500" min="0" value="${usdToSyp(item.price)}">
       <button class="save-price-btn">حفظ السعر</button>
     </div>
 
@@ -608,11 +620,11 @@ function renderItemCard(catKey, item){
     renderCategories();
   });
 
-  // حفظ السعر
+  // حفظ السعر (المدخل بالليرة السورية، يُخزَّن داخلياً كدولار)
   card.querySelector('.save-price-btn').addEventListener('click', async () => {
-    const newPrice = parseFloat(card.querySelector('.price-input').value);
-    if(isNaN(newPrice) || newPrice < 0){ alert('سعر غير صالح'); return; }
-    item.price = newPrice;
+    const newPriceSyp = parseFloat(card.querySelector('.price-input').value);
+    if(isNaN(newPriceSyp) || newPriceSyp < 0){ alert('سعر غير صالح'); return; }
+    item.price = sypToUsd(newPriceSyp);
     await persistMenu('تم تحديث السعر ✓');
   });
 
@@ -685,10 +697,11 @@ async function submitAddItem(){
   const nameEn = document.getElementById('formNameEn').value.trim();
   const descAr = document.getElementById('formDescAr').value.trim();
   const descEn = document.getElementById('formDescEn').value.trim();
-  const price = parseFloat(document.getElementById('formPrice').value);
+  const priceSyp = parseFloat(document.getElementById('formPrice').value);
 
   if(!nameAr || !nameEn){ alert('الرجاء إدخال اسم الصنف بالعربي والإنجليزي'); return; }
-  if(isNaN(price) || price < 0){ alert('الرجاء إدخال سعر صالح'); return; }
+  if(isNaN(priceSyp) || priceSyp < 0){ alert('الرجاء إدخال سعر صالح بالليرة السورية'); return; }
+  const price = sypToUsd(priceSyp);
 
   let baseKey = slugify(nameEn || nameAr);
   let finalKey = baseKey;

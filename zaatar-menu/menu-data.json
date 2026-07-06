@@ -98,7 +98,7 @@
         {
           "desc": "أسياخ لحم بقري مشوية بنكهة مدخنة",
           "desc_en": "Grilled beef skewers with a smoky flavor",
-          "hidden": true,
+          "hidden": false,
           "key": "beef-skewers",
           "name": "كباب لحم",
           "name_en": "Beef Skewers",

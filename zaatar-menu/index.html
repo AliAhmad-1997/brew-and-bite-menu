@@ -322,7 +322,7 @@
 
 <div class="hero">
   <button class="lang-toggle" id="langToggle" onclick="toggleLang()">English</button>
-  <button class="currency-toggle" id="currencyToggle" onclick="toggleCurrency()">🇸🇾 ل.س</button>
+  <button class="currency-toggle" id="currencyToggle" onclick="toggleCurrency()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" width="16" height="11" style="display:inline-block;vertical-align:middle;border-radius:2px;"><rect width="30" height="20" fill="#000000"/><rect width="30" height="6.667" y="0" fill="#007a3d"/><rect width="30" height="6.667" y="6.667" fill="#ffffff"/><g fill="#ce1126"><polygon points="7,8.2 7.5,9.7 9.1,9.7 7.8,10.6 8.3,12.1 7,11.2 5.7,12.1 6.2,10.6 4.9,9.7 6.5,9.7"/><polygon points="15,8.2 15.5,9.7 17.1,9.7 15.8,10.6 16.3,12.1 15,11.2 13.7,12.1 14.2,10.6 12.9,9.7 14.5,9.7"/><polygon points="23,8.2 23.5,9.7 25.1,9.7 23.8,10.6 24.3,12.1 23,11.2 21.7,12.1 22.2,10.6 20.9,9.7 22.5,9.7"/></g></svg> ل.س</button>
   <div class="hero-brand">
     <div class="hero-mark">🌿</div>
     <p class="brand-name" id="brandName">مطعم وكافيه الخواجة</p>
@@ -393,7 +393,7 @@ function formatPrice(usdPrice){
 function toggleCurrency(){
   currency = currency === 'usd' ? 'syp' : 'usd';
   const btn = document.getElementById('currencyToggle');
-  btn.innerText = currency === 'usd' ? '🇸🇾 ل.س' : '🇺🇸 USD';
+  btn.innerHTML = currency === 'usd' ? `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" width="16" height="11" style="display:inline-block;vertical-align:middle;border-radius:2px;"><rect width="30" height="20" fill="#000000"/><rect width="30" height="6.667" y="0" fill="#007a3d"/><rect width="30" height="6.667" y="6.667" fill="#ffffff"/><g fill="#ce1126"><polygon points="7,8.2 7.5,9.7 9.1,9.7 7.8,10.6 8.3,12.1 7,11.2 5.7,12.1 6.2,10.6 4.9,9.7 6.5,9.7"/><polygon points="15,8.2 15.5,9.7 17.1,9.7 15.8,10.6 16.3,12.1 15,11.2 13.7,12.1 14.2,10.6 12.9,9.7 14.5,9.7"/><polygon points="23,8.2 23.5,9.7 25.1,9.7 23.8,10.6 24.3,12.1 23,11.2 21.7,12.1 22.2,10.6 20.9,9.7 22.5,9.7"/></g></svg> ل.س` : '🇺🇸 USD';
   try{ localStorage.setItem('menu_currency', currency); }catch(e){}
   renderMenu();
 }
@@ -573,7 +573,7 @@ async function loadMenu(){
     const savedCurrency = localStorage.getItem('menu_currency');
     if(savedCurrency === 'usd' || savedCurrency === 'syp') currency = savedCurrency;
   }catch(e){}
-  document.getElementById('currencyToggle').innerText = currency === 'usd' ? '🇸🇾 ل.س' : '🇺🇸 USD';
+  document.getElementById('currencyToggle').innerHTML = currency === 'usd' ? `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" width="16" height="11" style="display:inline-block;vertical-align:middle;border-radius:2px;"><rect width="30" height="20" fill="#000000"/><rect width="30" height="6.667" y="0" fill="#007a3d"/><rect width="30" height="6.667" y="6.667" fill="#ffffff"/><g fill="#ce1126"><polygon points="7,8.2 7.5,9.7 9.1,9.7 7.8,10.6 8.3,12.1 7,11.2 5.7,12.1 6.2,10.6 4.9,9.7 6.5,9.7"/><polygon points="15,8.2 15.5,9.7 17.1,9.7 15.8,10.6 16.3,12.1 15,11.2 13.7,12.1 14.2,10.6 12.9,9.7 14.5,9.7"/><polygon points="23,8.2 23.5,9.7 25.1,9.7 23.8,10.6 24.3,12.1 23,11.2 21.7,12.1 22.2,10.6 20.9,9.7 22.5,9.7"/></g></svg> ل.س` : '🇺🇸 USD';
   renderStaticText();
   renderTabs();
   renderMenu();

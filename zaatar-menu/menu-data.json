@@ -65,7 +65,7 @@
         {
           "desc": "خضار طازجة مع خبز محمص مقرمش ودبس رمان",
           "desc_en": "Fresh vegetables with crispy toasted bread and pomegranate molasses",
-          "hidden": true,
+          "hidden": false,
           "key": "fattoush",
           "name": "فتوش",
           "name_en": "Fattoush",
@@ -229,7 +229,7 @@
         {
           "desc": "عصير فراولة طازج بدون إضافات",
           "desc_en": "Fresh strawberry juice, no additives",
-          "hidden": true,
+          "hidden": false,
           "key": "strawberry-juice",
           "name": "عصير فراولة",
           "name_en": "Strawberry Juice",

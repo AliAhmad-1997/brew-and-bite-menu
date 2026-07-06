@@ -203,7 +203,7 @@
         {
           "desc": "عصير برتقال طازج معصور فوراً",
           "desc_en": "Freshly squeezed orange juice",
-          "hidden": false,
+          "hidden": true,
           "key": "orange-juice",
           "name": "عصير برتقال",
           "name_en": "Orange Juice",
@@ -216,7 +216,7 @@
         {
           "desc": "عصير مانجا طبيعي منعش وكثيف القوام",
           "desc_en": "Natural mango juice, refreshing and thick",
-          "hidden": false,
+          "hidden": true,
           "key": "mango-juice",
           "name": "عصير مانجا",
           "name_en": "Mango Juice",

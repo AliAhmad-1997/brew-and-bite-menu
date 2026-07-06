@@ -11,7 +11,10 @@
           "name": "حمص بالطحينة",
           "name_en": "Hummus with Tahini",
           "offer": false,
-          "price": 6
+          "price": 6,
+          "offer_start": null,
+          "offer_end": null,
+          "popular": false
         },
         {
           "desc": "باذنجان مشوي مهروس مع طحينة ورمان",
@@ -21,7 +24,10 @@
           "name": "متبل باذنجان",
           "name_en": "Eggplant Moutabal",
           "offer": false,
-          "price": 6.5
+          "price": 6.5,
+          "offer_start": null,
+          "offer_end": null,
+          "popular": false
         },
         {
           "desc": "بقدونس مفروم ناعم مع برغل وطماطم وليمون",
@@ -31,7 +37,10 @@
           "name": "تبولة",
           "name_en": "Tabbouleh",
           "offer": false,
-          "price": 7
+          "price": 7,
+          "offer_start": null,
+          "offer_end": null,
+          "popular": false
         },
         {
           "desc": "خضار طازجة مع خبز محمص مقرمش ودبس رمان",
@@ -41,7 +50,10 @@
           "name": "فتوش",
           "name_en": "Fattoush",
           "offer": false,
-          "price": 7
+          "price": 7,
+          "offer_start": null,
+          "offer_end": null,
+          "popular": false
         }
       ],
       "label": "مقبلات",
@@ -58,7 +70,10 @@
           "name": "شيش طاووق",
           "name_en": "Shish Tawook",
           "offer": false,
-          "price": 14
+          "price": 14,
+          "offer_start": null,
+          "offer_end": null,
+          "popular": false
         },
         {
           "desc": "أسياخ لحم بقري مشوية بنكهة مدخنة",
@@ -68,7 +83,10 @@
           "name": "كباب لحم",
           "name_en": "Beef Skewers",
           "offer": false,
-          "price": 16
+          "price": 16,
+          "offer_start": null,
+          "offer_end": null,
+          "popular": false
         },
         {
           "desc": "لحم مفروم متبل بالبهارات ومشوي على الفحم",
@@ -78,7 +96,10 @@
           "name": "كفتة مشوية",
           "name_en": "Grilled Kafta",
           "offer": false,
-          "price": 14
+          "price": 14,
+          "offer_start": null,
+          "offer_end": null,
+          "popular": false
         },
         {
           "desc": "تشكيلة من الشيش طاووق والكباب والكفتة",
@@ -89,7 +110,9 @@
           "name_en": "Mixed Grill",
           "offer": false,
           "popular": true,
-          "price": 22
+          "price": 22,
+          "offer_start": null,
+          "offer_end": null
         }
       ],
       "label": "مشاوي",
@@ -106,7 +129,10 @@
           "name": "قهوة عربية",
           "name_en": "Arabic Coffee",
           "offer": false,
-          "price": 4
+          "price": 4,
+          "offer_start": null,
+          "offer_end": null,
+          "popular": false
         },
         {
           "desc": "شاي أسود مع أوراق نعناع طازجة",
@@ -116,7 +142,10 @@
           "name": "شاي بالنعناع",
           "name_en": "Mint Tea",
           "offer": false,
-          "price": 3.5
+          "price": 3.5,
+          "offer_start": null,
+          "offer_end": null,
+          "popular": false
         },
         {
           "desc": "قهوة تركية تقليدية مع قطعة راحة الحلقوم",
@@ -126,7 +155,10 @@
           "name": "قهوة تركية",
           "name_en": "Turkish Coffee",
           "offer": false,
-          "price": 4
+          "price": 4,
+          "offer_start": null,
+          "offer_end": null,
+          "popular": false
         },
         {
           "desc": "مشروب ساخن كريمي مع قرفة وفستق وجوز هند",
@@ -136,7 +168,10 @@
           "name": "سحلب",
           "name_en": "Sahlab",
           "offer": false,
-          "price": 5
+          "price": 5,
+          "offer_start": null,
+          "offer_end": null,
+          "popular": false
         }
       ],
       "label": "مشروبات ساخنة",
@@ -153,7 +188,10 @@
           "name": "عصير برتقال",
           "name_en": "Orange Juice",
           "offer": false,
-          "price": 5
+          "price": 5,
+          "offer_start": null,
+          "offer_end": null,
+          "popular": false
         },
         {
           "desc": "عصير مانجا طبيعي منعش وكثيف القوام",
@@ -163,7 +201,10 @@
           "name": "عصير مانجا",
           "name_en": "Mango Juice",
           "offer": false,
-          "price": 5.5
+          "price": 5.5,
+          "offer_start": null,
+          "offer_end": null,
+          "popular": false
         },
         {
           "desc": "عصير فراولة طازج بدون إضافات",
@@ -173,7 +214,10 @@
           "name": "عصير فراولة",
           "name_en": "Strawberry Juice",
           "offer": false,
-          "price": 5.5
+          "price": 5.5,
+          "offer_start": null,
+          "offer_end": null,
+          "popular": false
         },
         {
           "desc": "ليمون طازج مع أوراق نعناع وثلج مجروش",
@@ -183,7 +227,10 @@
           "name": "ليموناضة بالنعناع",
           "name_en": "Mint Lemonade",
           "offer": false,
-          "price": 5
+          "price": 5,
+          "offer_start": null,
+          "offer_end": null,
+          "popular": false
         }
       ],
       "label": "عصائر طبيعية",

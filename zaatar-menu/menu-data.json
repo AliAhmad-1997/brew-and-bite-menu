@@ -229,7 +229,7 @@
         {
           "desc": "عصير فراولة طازج بدون إضافات",
           "desc_en": "Fresh strawberry juice, no additives",
-          "hidden": false,
+          "hidden": true,
           "key": "strawberry-juice",
           "name": "عصير فراولة",
           "name_en": "Strawberry Juice",

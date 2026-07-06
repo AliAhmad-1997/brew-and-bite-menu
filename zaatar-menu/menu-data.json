@@ -203,7 +203,7 @@
         {
           "desc": "عصير برتقال طازج معصور فوراً",
           "desc_en": "Freshly squeezed orange juice",
-          "hidden": true,
+          "hidden": false,
           "key": "orange-juice",
           "name": "عصير برتقال",
           "name_en": "Orange Juice",

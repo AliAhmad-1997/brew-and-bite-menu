@@ -216,7 +216,7 @@
         {
           "desc": "عصير مانجا طبيعي منعش وكثيف القوام",
           "desc_en": "Natural mango juice, refreshing and thick",
-          "hidden": true,
+          "hidden": false,
           "key": "mango-juice",
           "name": "عصير مانجا",
           "name_en": "Mango Juice",
@@ -242,7 +242,7 @@
         {
           "desc": "ليمون طازج مع أوراق نعناع وثلج مجروش",
           "desc_en": "Fresh lemon with mint leaves and crushed ice",
-          "hidden": true,
+          "hidden": false,
           "key": "mint-lemonade",
           "name": "ليموناضة بالنعناع",
           "name_en": "Mint Lemonade",

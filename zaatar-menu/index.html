@@ -257,6 +257,28 @@
   }
   .footer strong{ color:var(--gold-bright); font-size:15px; display:block; margin-bottom:6px; font-family:'Amiri',serif; }
   .footer .qr-note{ margin-top:10px; opacity:0.7; font-size:11px; }
+  .admin-link-wrap{ margin-top:22px; text-align:center; }
+  .admin-link{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    background:rgba(205,163,74,0.08);
+    border:1px solid rgba(205,163,74,0.3);
+    color:var(--ink-soft);
+    font-size:12px;
+    font-weight:600;
+    padding:8px 16px;
+    border-radius:999px;
+    text-decoration:none;
+    cursor:pointer;
+    transition:all 0.2s ease;
+    font-family:inherit;
+  }
+  .admin-link:hover, .admin-link:active{
+    color:var(--gold-bright);
+    border-color:var(--gold);
+    background:rgba(205,163,74,0.14);
+  }
 
   html[dir="ltr"] body{ font-family:'Inter','Cairo',sans-serif; }
   html[dir="ltr"] .brand-name{ font-family:'Georgia','Amiri',serif; }
@@ -329,6 +351,9 @@
   <span id="footerAddress">حمص، سوريا</span><br>
   @alkhawaja.restaurant
   <div class="qr-note" id="qrNote">قائمة رقمية · امسح · تصفح · استمتع</div>
+  <div class="admin-link-wrap">
+    <a class="admin-link" href="admin.html" id="adminLink">🔐 <span id="adminLinkText">لوحة التحكم</span></a>
+  </div>
 </div>
 
 <script>
@@ -341,6 +366,21 @@ let lang = 'ar';
 let currency = 'usd';
 let searchDebounceTimer = null;
 const ANALYTICS_ENDPOINT = 'https://03l2yp511l-5055.hosted.obvious.ai/api/track';
+
+function isOfferActive(item){
+  if(!item.offer) return false;
+  const now = new Date();
+  if(item.offer_start){
+    const start = new Date(item.offer_start);
+    if(!isNaN(start) && now < start) return false;
+  }
+  if(item.offer_end){
+    const end = new Date(item.offer_end);
+    end.setHours(23,59,59,999);
+    if(!isNaN(end) && now > end) return false;
+  }
+  return true;
+}
 
 function formatPrice(usdPrice){
   if(currency === 'syp'){
@@ -371,7 +411,8 @@ const STRINGS = {
     footerName: 'مطعم وكافيه الخواجة',
     footerAddress: 'حمص، سوريا',
     qrNote: 'قائمة رقمية · امسح · تصفح · استمتع',
-    toggleLabel: 'English'
+    toggleLabel: 'English',
+    adminLink: 'لوحة التحكم'
   },
   en: {
     brandName: 'Al Khawaja Restaurant & Cafe',
@@ -385,7 +426,8 @@ const STRINGS = {
     footerName: 'Al Khawaja Restaurant & Cafe',
     footerAddress: 'Homs, Syria',
     qrNote: 'Digital Menu · Scan · Browse · Enjoy',
-    toggleLabel: 'العربية'
+    toggleLabel: 'العربية',
+    adminLink: 'Admin Panel'
   }
 };
 
@@ -420,6 +462,7 @@ function renderStaticText(){
   document.getElementById('footerName').innerText = s.footerName;
   document.getElementById('footerAddress').innerText = s.footerAddress;
   document.getElementById('qrNote').innerText = s.qrNote;
+  document.getElementById('adminLinkText').innerText = s.adminLink;
 }
 
 function renderTabs(){
@@ -496,7 +539,7 @@ function renderMenu(){
           <div class="item-top">
             <div>
               <p class="item-name">${itemName}</p>
-              ${item.offer ? `<span class="popular-badge offer-badge">${STRINGS[lang].offer}</span>` : (item.popular ? `<span class="popular-badge">${STRINGS[lang].popular}</span>` : '')}
+              ${isOfferActive(item) ? `<span class="popular-badge offer-badge">${STRINGS[lang].offer}</span>` : (item.popular ? `<span class="popular-badge">${STRINGS[lang].popular}</span>` : '')}
             </div>
             <div class="item-price">${formatPrice(item.price)}</div>
           </div>

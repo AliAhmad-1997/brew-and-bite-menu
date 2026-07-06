@@ -39,7 +39,7 @@
         {
           "desc": "باذنجان مشوي مهروس مع طحينة ورمان",
           "desc_en": "Grilled eggplant mash with tahini and pomegranate",
-          "hidden": true,
+          "hidden": false,
           "key": "moutabal",
           "name": "متبل باذنجان",
           "name_en": "Eggplant Moutabal",
@@ -52,7 +52,7 @@
         {
           "desc": "بقدونس مفروم ناعم مع برغل وطماطم وليمون",
           "desc_en": "Finely chopped parsley with bulgur, tomato and lemon",
-          "hidden": true,
+          "hidden": false,
           "key": "tabbouleh",
           "name": "تبولة",
           "name_en": "Tabbouleh",

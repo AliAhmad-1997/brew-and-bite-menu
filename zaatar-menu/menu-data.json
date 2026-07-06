@@ -1,4 +1,24 @@
 {
+  "images": {
+    "arabic-coffee": "img/arabic-coffee.jpg",
+    "beef-skewers": "img/beef-skewers.jpg",
+    "default-item": "img/default-item.jpg",
+    "fattoush": "img/fattoush.jpg",
+    "hero-bg": "img/hero-bg.jpg",
+    "hummus": "img/hummus.jpg",
+    "kafta": "img/kafta.jpg",
+    "mango-juice": "img/mango-juice.jpg",
+    "mint-lemonade": "img/mint-lemonade.jpg",
+    "mint-tea": "img/mint-tea.jpg",
+    "mixed-grill": "img/mixed-grill.jpg",
+    "moutabal": "img/moutabal.jpg",
+    "orange-juice": "img/orange-juice.jpg",
+    "sahlab": "img/sahlab.jpg",
+    "shish-tawook": "img/shish-tawook.jpg",
+    "strawberry-juice": "img/strawberry-juice.jpg",
+    "tabbouleh": "img/tabbouleh.jpg",
+    "turkish-coffee": "img/turkish-coffee.jpg"
+  },
   "menu": {
     "appetizers": {
       "icon": "🥗",
@@ -11,10 +31,10 @@
           "name": "حمص بالطحينة",
           "name_en": "Hummus with Tahini",
           "offer": false,
-          "price": 6,
-          "offer_start": null,
           "offer_end": null,
-          "popular": false
+          "offer_start": null,
+          "popular": false,
+          "price": 6.5
         },
         {
           "desc": "باذنجان مشوي مهروس مع طحينة ورمان",
@@ -24,10 +44,10 @@
           "name": "متبل باذنجان",
           "name_en": "Eggplant Moutabal",
           "offer": false,
-          "price": 6.5,
-          "offer_start": null,
           "offer_end": null,
-          "popular": false
+          "offer_start": null,
+          "popular": false,
+          "price": 6.5
         },
         {
           "desc": "بقدونس مفروم ناعم مع برغل وطماطم وليمون",
@@ -37,10 +57,10 @@
           "name": "تبولة",
           "name_en": "Tabbouleh",
           "offer": false,
-          "price": 7,
-          "offer_start": null,
           "offer_end": null,
-          "popular": false
+          "offer_start": null,
+          "popular": false,
+          "price": 7
         },
         {
           "desc": "خضار طازجة مع خبز محمص مقرمش ودبس رمان",
@@ -50,10 +70,10 @@
           "name": "فتوش",
           "name_en": "Fattoush",
           "offer": false,
-          "price": 7,
-          "offer_start": null,
           "offer_end": null,
-          "popular": false
+          "offer_start": null,
+          "popular": false,
+          "price": 7
         }
       ],
       "label": "مقبلات",
@@ -70,10 +90,10 @@
           "name": "شيش طاووق",
           "name_en": "Shish Tawook",
           "offer": false,
-          "price": 14,
-          "offer_start": null,
           "offer_end": null,
-          "popular": false
+          "offer_start": null,
+          "popular": false,
+          "price": 14
         },
         {
           "desc": "أسياخ لحم بقري مشوية بنكهة مدخنة",
@@ -83,10 +103,10 @@
           "name": "كباب لحم",
           "name_en": "Beef Skewers",
           "offer": false,
-          "price": 16,
-          "offer_start": null,
           "offer_end": null,
-          "popular": false
+          "offer_start": null,
+          "popular": false,
+          "price": 16
         },
         {
           "desc": "لحم مفروم متبل بالبهارات ومشوي على الفحم",
@@ -96,10 +116,10 @@
           "name": "كفتة مشوية",
           "name_en": "Grilled Kafta",
           "offer": false,
-          "price": 14,
-          "offer_start": null,
           "offer_end": null,
-          "popular": false
+          "offer_start": null,
+          "popular": false,
+          "price": 14
         },
         {
           "desc": "تشكيلة من الشيش طاووق والكباب والكفتة",
@@ -109,10 +129,10 @@
           "name": "مشاوي مشكلة",
           "name_en": "Mixed Grill",
           "offer": false,
-          "popular": true,
-          "price": 22,
+          "offer_end": null,
           "offer_start": null,
-          "offer_end": null
+          "popular": true,
+          "price": 22
         }
       ],
       "label": "مشاوي",
@@ -129,10 +149,10 @@
           "name": "قهوة عربية",
           "name_en": "Arabic Coffee",
           "offer": false,
-          "price": 4,
-          "offer_start": null,
           "offer_end": null,
-          "popular": false
+          "offer_start": null,
+          "popular": false,
+          "price": 4
         },
         {
           "desc": "شاي أسود مع أوراق نعناع طازجة",
@@ -142,10 +162,10 @@
           "name": "شاي بالنعناع",
           "name_en": "Mint Tea",
           "offer": false,
-          "price": 3.5,
-          "offer_start": null,
           "offer_end": null,
-          "popular": false
+          "offer_start": null,
+          "popular": false,
+          "price": 3.5
         },
         {
           "desc": "قهوة تركية تقليدية مع قطعة راحة الحلقوم",
@@ -155,10 +175,10 @@
           "name": "قهوة تركية",
           "name_en": "Turkish Coffee",
           "offer": false,
-          "price": 4,
-          "offer_start": null,
           "offer_end": null,
-          "popular": false
+          "offer_start": null,
+          "popular": false,
+          "price": 4
         },
         {
           "desc": "مشروب ساخن كريمي مع قرفة وفستق وجوز هند",
@@ -168,10 +188,10 @@
           "name": "سحلب",
           "name_en": "Sahlab",
           "offer": false,
-          "price": 5,
-          "offer_start": null,
           "offer_end": null,
-          "popular": false
+          "offer_start": null,
+          "popular": false,
+          "price": 5
         }
       ],
       "label": "مشروبات ساخنة",
@@ -188,10 +208,10 @@
           "name": "عصير برتقال",
           "name_en": "Orange Juice",
           "offer": false,
-          "price": 5,
-          "offer_start": null,
           "offer_end": null,
-          "popular": false
+          "offer_start": null,
+          "popular": false,
+          "price": 5
         },
         {
           "desc": "عصير مانجا طبيعي منعش وكثيف القوام",
@@ -201,10 +221,10 @@
           "name": "عصير مانجا",
           "name_en": "Mango Juice",
           "offer": false,
-          "price": 5.5,
-          "offer_start": null,
           "offer_end": null,
-          "popular": false
+          "offer_start": null,
+          "popular": false,
+          "price": 5.5
         },
         {
           "desc": "عصير فراولة طازج بدون إضافات",
@@ -214,10 +234,10 @@
           "name": "عصير فراولة",
           "name_en": "Strawberry Juice",
           "offer": false,
-          "price": 5.5,
-          "offer_start": null,
           "offer_end": null,
-          "popular": false
+          "offer_start": null,
+          "popular": false,
+          "price": 5.5
         },
         {
           "desc": "ليمون طازج مع أوراق نعناع وثلج مجروش",
@@ -227,38 +247,18 @@
           "name": "ليموناضة بالنعناع",
           "name_en": "Mint Lemonade",
           "offer": false,
-          "price": 5,
-          "offer_start": null,
           "offer_end": null,
-          "popular": false
+          "offer_start": null,
+          "popular": false,
+          "price": 5
         }
       ],
       "label": "عصائر طبيعية",
       "label_en": "Fresh Juices"
     }
   },
-  "images": {
-    "hummus": "img/hummus.jpg",
-    "moutabal": "img/moutabal.jpg",
-    "tabbouleh": "img/tabbouleh.jpg",
-    "fattoush": "img/fattoush.jpg",
-    "shish-tawook": "img/shish-tawook.jpg",
-    "beef-skewers": "img/beef-skewers.jpg",
-    "kafta": "img/kafta.jpg",
-    "mixed-grill": "img/mixed-grill.jpg",
-    "orange-juice": "img/orange-juice.jpg",
-    "mango-juice": "img/mango-juice.jpg",
-    "strawberry-juice": "img/strawberry-juice.jpg",
-    "mint-lemonade": "img/mint-lemonade.jpg",
-    "arabic-coffee": "img/arabic-coffee.jpg",
-    "mint-tea": "img/mint-tea.jpg",
-    "turkish-coffee": "img/turkish-coffee.jpg",
-    "sahlab": "img/sahlab.jpg",
-    "hero-bg": "img/hero-bg.jpg",
-    "default-item": "img/default-item.jpg"
-  },
   "settings": {
-    "exchange_rate_syp_per_usd": 13000,
-    "default_currency": "usd"
+    "default_currency": "usd",
+    "exchange_rate_syp_per_usd": 13000
   }
 }

@@ -39,7 +39,7 @@
         {
           "desc": "باذنجان مشوي مهروس مع طحينة ورمان",
           "desc_en": "Grilled eggplant mash with tahini and pomegranate",
-          "hidden": false,
+          "hidden": true,
           "key": "moutabal",
           "name": "متبل باذنجان",
           "name_en": "Eggplant Moutabal",
@@ -65,7 +65,7 @@
         {
           "desc": "خضار طازجة مع خبز محمص مقرمش ودبس رمان",
           "desc_en": "Fresh vegetables with crispy toasted bread and pomegranate molasses",
-          "hidden": false,
+          "hidden": true,
           "key": "fattoush",
           "name": "فتوش",
           "name_en": "Fattoush",

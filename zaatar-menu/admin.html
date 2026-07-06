@@ -346,6 +346,42 @@
 
   .empty-hint{ text-align:center; color:var(--ink-soft); font-size:13px; padding:30px 0; }
   .toast-note{ font-size:11px; color:var(--ink-soft); margin-top:6px; }
+
+  .settings-section{
+    margin-top:8px;
+    padding-top:18px;
+    border-top:1px solid var(--line);
+  }
+  .settings-toggle-btn{
+    width:100%;
+    background:rgba(255,255,255,0.05);
+    border:1px solid var(--line);
+    color:var(--ink-soft);
+    border-radius:14px;
+    padding:12px;
+    font-size:13.5px;
+    font-weight:700;
+    cursor:pointer;
+    font-family:inherit;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+  }
+  .settings-panel{
+    display:none;
+    margin-top:14px;
+    background:linear-gradient(160deg, var(--paper), var(--paper-2));
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:16px;
+  }
+  .settings-panel.show{ display:block; }
+  .settings-panel .form-field{ margin-bottom:12px; }
+  .change-pwd-actions{ display:flex; gap:10px; margin-top:6px; }
+  .pwd-status{ font-size:12.5px; margin-top:10px; min-height:16px; }
+  .pwd-status.success{ color:var(--success); }
+  .pwd-status.error{ color:var(--danger); }
 </style>
 </head>
 <body>
@@ -373,6 +409,29 @@
   <div class="section">
     <button class="add-item-btn" onclick="openAddModal()">➕ إضافة صنف جديد</button>
     <div id="categoriesContainer"></div>
+
+    <div class="settings-section">
+      <button class="settings-toggle-btn" onclick="toggleSettingsPanel()">⚙️ <span id="settingsToggleText">تغيير كلمة السر</span></button>
+      <div class="settings-panel" id="settingsPanel">
+        <div class="form-field">
+          <label>كلمة السر الحالية</label>
+          <input type="password" id="currentPwdInput" placeholder="••••" inputmode="numeric">
+        </div>
+        <div class="form-field">
+          <label>كلمة السر الجديدة</label>
+          <input type="password" id="newPwdInput" placeholder="••••" inputmode="numeric">
+        </div>
+        <div class="form-field">
+          <label>تأكيد كلمة السر الجديدة</label>
+          <input type="password" id="confirmPwdInput" placeholder="••••" inputmode="numeric">
+        </div>
+        <div class="change-pwd-actions">
+          <button class="btn-secondary" onclick="toggleSettingsPanel()">إلغاء</button>
+          <button class="btn-primary" onclick="submitChangePassword()">حفظ كلمة السر</button>
+        </div>
+        <div class="pwd-status" id="pwdStatus"></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -735,6 +794,76 @@ async function submitAddItem(){
   closeModal();
   await persistMenu('تمت إضافة الصنف ✓');
   renderCategories();
+}
+
+// ---------- تغيير كلمة السر ----------
+function toggleSettingsPanel(){
+  const panel = document.getElementById('settingsPanel');
+  const isOpen = panel.classList.contains('show');
+  panel.classList.toggle('show');
+  document.getElementById('settingsToggleText').innerText = isOpen ? 'تغيير كلمة السر' : 'إخفاء';
+  if(isOpen){
+    // إعادة تصفير الحقول عند الإغلاق
+    document.getElementById('currentPwdInput').value = '';
+    document.getElementById('newPwdInput').value = '';
+    document.getElementById('confirmPwdInput').value = '';
+    document.getElementById('pwdStatus').innerText = '';
+    document.getElementById('pwdStatus').className = 'pwd-status';
+  }
+}
+
+async function submitChangePassword(){
+  const currentPwd = document.getElementById('currentPwdInput').value.trim();
+  const newPwd = document.getElementById('newPwdInput').value.trim();
+  const confirmPwd = document.getElementById('confirmPwdInput').value.trim();
+  const statusEl = document.getElementById('pwdStatus');
+
+  statusEl.innerText = '';
+  statusEl.className = 'pwd-status';
+
+  if(!currentPwd || !newPwd || !confirmPwd){
+    statusEl.innerText = 'الرجاء تعبئة جميع الحقول';
+    statusEl.className = 'pwd-status error';
+    return;
+  }
+  if(newPwd.length < 4){
+    statusEl.innerText = 'كلمة السر الجديدة يجب أن تكون 4 خانات على الأقل';
+    statusEl.className = 'pwd-status error';
+    return;
+  }
+  if(newPwd !== confirmPwd){
+    statusEl.innerText = 'كلمة السر الجديدة وتأكيدها غير متطابقين';
+    statusEl.className = 'pwd-status error';
+    return;
+  }
+  if(newPwd === currentPwd){
+    statusEl.innerText = 'كلمة السر الجديدة مطابقة للقديمة';
+    statusEl.className = 'pwd-status error';
+    return;
+  }
+
+  try{
+    const res = await fetch(`${API_BASE}/api/change-password`, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({password: currentPwd, new_password: newPwd})
+    });
+    const json = await res.json();
+    if(json.ok){
+      AUTH_PASSWORD = newPwd; // تحديث كلمة السر بالذاكرة لهذه الجلسة حتى تعمل العمليات اللاحقة (حفظ، إضافة، حذف...)
+      statusEl.innerText = 'تم تغيير كلمة السر بنجاح ✓';
+      statusEl.className = 'pwd-status success';
+      document.getElementById('currentPwdInput').value = '';
+      document.getElementById('newPwdInput').value = '';
+      document.getElementById('confirmPwdInput').value = '';
+    } else {
+      statusEl.innerText = json.error || 'فشل تغيير كلمة السر';
+      statusEl.className = 'pwd-status error';
+    }
+  }catch(e){
+    statusEl.innerText = 'تعذر الاتصال بالخدمة';
+    statusEl.className = 'pwd-status error';
+  }
 }
 </script>
 

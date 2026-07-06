@@ -242,7 +242,7 @@
         {
           "desc": "ليمون طازج مع أوراق نعناع وثلج مجروش",
           "desc_en": "Fresh lemon with mint leaves and crushed ice",
-          "hidden": false,
+          "hidden": true,
           "key": "mint-lemonade",
           "name": "ليموناضة بالنعناع",
           "name_en": "Mint Lemonade",

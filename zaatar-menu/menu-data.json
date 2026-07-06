@@ -52,7 +52,7 @@
         {
           "desc": "بقدونس مفروم ناعم مع برغل وطماطم وليمون",
           "desc_en": "Finely chopped parsley with bulgur, tomato and lemon",
-          "hidden": false,
+          "hidden": true,
           "key": "tabbouleh",
           "name": "تبولة",
           "name_en": "Tabbouleh",

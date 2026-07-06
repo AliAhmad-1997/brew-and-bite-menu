@@ -26,7 +26,7 @@
         {
           "desc": "حمص كريمي مع طحينة وزيت زيتون وحبة صنوبر",
           "desc_en": "Creamy hummus with tahini, olive oil and pine nuts",
-          "hidden": false,
+          "hidden": true,
           "key": "hummus",
           "name": "حمص بالطحينة",
           "name_en": "Hummus with Tahini",

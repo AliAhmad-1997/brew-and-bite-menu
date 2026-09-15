@@ -30,9 +30,9 @@
           "key": "hummus",
           "name": "حمص بالطحينة",
           "name_en": "Hummus with Tahini",
-          "offer": false,
-          "offer_end": null,
-          "offer_start": null,
+          "offer": true,
+          "offer_end": "2026-09-30",
+          "offer_start": "2026-09-18",
           "popular": false,
           "price": 6
         },
